@@ -2,7 +2,7 @@
     "name": "Player control",
     "maps": [
         {
-            "name": "Teclado",
+            "name": "CharacterControls",
             "id": "b072fc83-cdba-4eda-9ba8-b430502b1093",
             "actions": [
                 {
