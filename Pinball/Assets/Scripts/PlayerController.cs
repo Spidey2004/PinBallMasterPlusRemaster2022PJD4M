@@ -7,6 +7,8 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
+    public int coins = 0;
+
     // Guarda uma referência para os controles que criamos no InputAction
     private GameControls _gameControls;
     // Guarda uma referência para o PlayerInput, que é quem conecta o dispositivo de controle ao código
@@ -19,14 +21,13 @@ public class PlayerController : MonoBehaviour
     private Rigidbody _rigidbody;
     private bool _isGrounded;
     
-    
     // Velocidade que o jogador vai se mover
     public float _moveMultiplier;
     public float maxVelocity;
     public float rayDistance;
     public LayerMask layerMask;
     public float jumpForce;
-
+    
     // Chamada quando o objeto é desativado
     private void OnEnable()
     {
@@ -51,7 +52,6 @@ public class PlayerController : MonoBehaviour
         // Desinscrever o delegate
         _playerInput.onActionTriggered -= OnActionTriggered;
     }
-
     // Delegate para adicionarmos funcionalidade quando o jogador aperta um botão 
     private void OnActionTriggered(InputAction.CallbackContext obj)
     {
@@ -66,7 +66,6 @@ public class PlayerController : MonoBehaviour
             if (obj.performed) Jump();
         }
     }
-    
     // Executa a movimentação do jogador através da fisica
     private void Move()
     {
@@ -92,7 +91,6 @@ public class PlayerController : MonoBehaviour
         Move();
         LimitVelocity();
     }
-
     private void LimitVelocity()
     {
         Vector3 velocity = _rigidbody.velocity;
@@ -102,7 +100,6 @@ public class PlayerController : MonoBehaviour
 
         _rigidbody.velocity = velocity;
     }
-
     private void CheckGround()
     {
         RaycastHit collision;
@@ -116,7 +113,6 @@ public class PlayerController : MonoBehaviour
             _isGrounded = false;
         }
     }
-
     private void Jump()
     {
         if (_isGrounded)
@@ -124,15 +120,23 @@ public class PlayerController : MonoBehaviour
             _rigidbody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
         }
     }
-
     private void Update()
     {
         CheckGround();
     }
-
     private void OnDrawGizmos()
     {
         Debug.DrawRay(transform.position,Vector3.down * rayDistance,Color.red);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.CompareTag("Coin"))
+        {
+            coins++;
+            Destroy(other.gameObject);
+            Debug.Log(coins);
+        }
     }
 }
 

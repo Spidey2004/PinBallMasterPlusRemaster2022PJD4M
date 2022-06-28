@@ -7,12 +7,12 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: PlayerGlowMaterial
+  m_Name: Shader Graphs_PlayerGlow
   m_Shader: {fileID: -6465566751694194690, guid: 468824f6e95678a4d8d0a4987d23ae27, type: 3}
   m_ShaderKeywords: 
-  m_LightmapFlags: 2
-  m_EnableInstancingVariants: 1
-  m_DoubleSidedGI: 1
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
@@ -33,5 +33,5 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats: []
     m_Colors:
-    - Color_4004eec787874e88bdd37ebbe2cfbb9f: {r: 0.19424175, g: 0.7996329, b: 0.9150943, a: 0}
+    - Color_4004eec787874e88bdd37ebbe2cfbb9f: {r: 0.90588236, g: 0.74731, b: 0, a: 0}
   m_BuildTextureStacks: []
