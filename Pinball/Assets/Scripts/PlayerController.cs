@@ -4,10 +4,11 @@ using System.Collections.Generic;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
-    public int coins = 0;
+    [SerializeField] public int coins = 0;
 
     // Guarda uma referência para os controles que criamos no InputAction
     private GameControls _gameControls;
@@ -64,6 +65,11 @@ public class PlayerController : MonoBehaviour
         if (obj.action.name.CompareTo(_gameControls.PlayerControls.Jump.name) == 0)
         {
             if (obj.performed) Jump();
+        }
+
+        if (obj.action.name.CompareTo(_gameControls.PlayerControls.Menu.name) == 0)
+        {
+            if(obj.performed) Menu();
         }
     }
     // Executa a movimentação do jogador através da fisica
@@ -128,7 +134,6 @@ public class PlayerController : MonoBehaviour
     {
         Debug.DrawRay(transform.position,Vector3.down * rayDistance,Color.red);
     }
-
     private void OnTriggerEnter(Collider other)
     {
         if(other.CompareTag("Coin"))
@@ -137,6 +142,10 @@ public class PlayerController : MonoBehaviour
             Destroy(other.gameObject);
             Debug.Log(coins);
         }
+    }
+    private void Menu()
+    {
+        SceneManager.LoadScene("Scenes/Menu");
     }
 }
 

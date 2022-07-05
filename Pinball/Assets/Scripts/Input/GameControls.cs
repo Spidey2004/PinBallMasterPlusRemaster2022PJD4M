@@ -33,6 +33,14 @@ public class @GameControls : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Menu"",
+                    ""type"": ""Button"",
+                    ""id"": ""993106b3-98ee-4e76-acea-758eb63bd873"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -211,6 +219,17 @@ public class @GameControls : IInputActionCollection, IDisposable
                     ""action"": ""Jump"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""698c5c92-c8b3-4305-9648-956444242279"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Menu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -255,6 +274,7 @@ public class @GameControls : IInputActionCollection, IDisposable
         m_PlayerControls = asset.FindActionMap("PlayerControls", throwIfNotFound: true);
         m_PlayerControls_Movement = m_PlayerControls.FindAction("Movement", throwIfNotFound: true);
         m_PlayerControls_Jump = m_PlayerControls.FindAction("Jump", throwIfNotFound: true);
+        m_PlayerControls_Menu = m_PlayerControls.FindAction("Menu", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -306,12 +326,14 @@ public class @GameControls : IInputActionCollection, IDisposable
     private IPlayerControlsActions m_PlayerControlsActionsCallbackInterface;
     private readonly InputAction m_PlayerControls_Movement;
     private readonly InputAction m_PlayerControls_Jump;
+    private readonly InputAction m_PlayerControls_Menu;
     public struct PlayerControlsActions
     {
         private @GameControls m_Wrapper;
         public PlayerControlsActions(@GameControls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Movement => m_Wrapper.m_PlayerControls_Movement;
         public InputAction @Jump => m_Wrapper.m_PlayerControls_Jump;
+        public InputAction @Menu => m_Wrapper.m_PlayerControls_Menu;
         public InputActionMap Get() { return m_Wrapper.m_PlayerControls; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -327,6 +349,9 @@ public class @GameControls : IInputActionCollection, IDisposable
                 @Jump.started -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnJump;
                 @Jump.performed -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnJump;
                 @Jump.canceled -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnJump;
+                @Menu.started -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnMenu;
+                @Menu.performed -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnMenu;
+                @Menu.canceled -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnMenu;
             }
             m_Wrapper.m_PlayerControlsActionsCallbackInterface = instance;
             if (instance != null)
@@ -337,6 +362,9 @@ public class @GameControls : IInputActionCollection, IDisposable
                 @Jump.started += instance.OnJump;
                 @Jump.performed += instance.OnJump;
                 @Jump.canceled += instance.OnJump;
+                @Menu.started += instance.OnMenu;
+                @Menu.performed += instance.OnMenu;
+                @Menu.canceled += instance.OnMenu;
             }
         }
     }
@@ -372,5 +400,6 @@ public class @GameControls : IInputActionCollection, IDisposable
     {
         void OnMovement(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
+        void OnMenu(InputAction.CallbackContext context);
     }
 }
