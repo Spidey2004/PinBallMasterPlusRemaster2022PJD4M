@@ -152,6 +152,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50c1c382f7ab6de4b94d816c84b1e208, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  guiName: Scenes/GUI
+  levelName: Scenes/Initialization
+  playerAndCameraPrefab: {fileID: 7520077649694576270, guid: 75acf32c5933e834aabed10be6e99837, type: 3}
 --- !u!4 &218680150
 Transform:
   m_ObjectHideFlags: 0
