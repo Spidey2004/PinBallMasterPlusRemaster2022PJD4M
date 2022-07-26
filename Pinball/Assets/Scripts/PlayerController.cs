@@ -89,6 +89,7 @@ public class PlayerController : MonoBehaviour
                             // Multiplica esse resultado pela velocidade e pela variavel de deltaTime
                              *_moveMultiplier * Time.fixedDeltaTime);
         Debug.Log("Esta movendo");
+        
     }
     // Função que é executada todo loop de fisica da unity
     private void FixedUpdate()
@@ -140,6 +141,7 @@ public class PlayerController : MonoBehaviour
         {
             coins++;
             Destroy(other.gameObject);
+            PlayerObserverManager.CoinsChanged(coins);
             Debug.Log(coins);
         }
     }

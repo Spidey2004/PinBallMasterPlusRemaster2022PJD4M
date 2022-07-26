@@ -5,10 +5,12 @@ using UnityEngine.SceneManagement;
 
 public class Menu : MonoBehaviour
 {
+    public Animator transition;
     public void Play()
     {
         SceneManager.LoadScene("Scenes/Protitype");
         Debug.Log("START!");
+        transition.SetTrigger("Start");
     }
 
     public void Quit()
