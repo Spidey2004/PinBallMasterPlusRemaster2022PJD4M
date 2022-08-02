@@ -9,7 +9,7 @@ using UnityEngine.SceneManagement;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] public int coins = 0;
-
+    [SerializeField] public int cristal = 0;
     // Guarda uma referência para os controles que criamos no InputAction
     private GameControls _gameControls;
     // Guarda uma referência para o PlayerInput, que é quem conecta o dispositivo de controle ao código
@@ -143,6 +143,13 @@ public class PlayerController : MonoBehaviour
             Destroy(other.gameObject);
             PlayerObserverManager.CoinsChanged(coins);
             Debug.Log(coins);
+        }
+        if(other.CompareTag("Rubi"))
+        {
+            cristal++;
+            Destroy(other.gameObject);
+            PlayerObserverManager.CristalChanged(cristal);
+            Debug.Log(cristal);
         }
     }
     private void Menu()
